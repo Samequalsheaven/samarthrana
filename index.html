@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio of Samarth Rana - Master of Fine Arts, Motion Graphics, Industrial Product Design & Video Editing.">
+    <title>Samarth Rana | Creative Multi-Disciplinary Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@700;900&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="mouse-trail-container"></div>
+    <div id="deco-shapes-container"></div>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" onclick="navigateToMain()" class="logo" aria-label="Home">SR<span class="dot">.</span></a>
+            <ul class="nav-links">
+                <li><a href="#work" onclick="navigateToMain()">Showcase</a></li>
+                <li><a href="#dynamic-sections" onclick="navigateToMain()">Explore</a></li>
+                <li><a href="#about" onclick="navigateToMain()">Bio</a></li>
+                <li><a href="#contact" onclick="navigateToMain()">Connect</a></li>
+            </ul>
+            <a href="#" class="btn btn-primary">Download Resume</a>
+            <button id="music-toggle" class="music-toggle" aria-label="Toggle music player" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0 10px; color: var(--accent-600); transition: all 0.3s ease;" onmouseover="this.style.color='var(--accent-300)'; this.style.textShadow='0 0 10px rgba(0, 217, 255, 0.5)';" onmouseout="this.style.color='var(--accent-600)'; this.style.textShadow='none';">🎵</button>
+            <button class="mobile-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header id="hero" class="hero-section">
+        <div class="video-background">
+            <video autoplay loop muted playsinline poster="assets/video/poster.jpg" id="hero-video">
+                <source src="assets/video/hero.mp4" type="video/mp4">
+            </video>
+            <div class="overlay"></div>
+        </div>
+
+        <!-- Optional: Hero Image Carousel for added visual depth -->
+        <div class="fixed-background" id="hero-carousel" style="display:none;">
+            <img src="assets/images/placeholder-fineart-1.jpg" class="hero-slide active" alt="Fine Art Background">
+            <img src="assets/images/placeholder-fineart-2.jpg" class="hero-slide" alt="3D Design Background">
+            <img src="assets/images/placeholder-fineart-3.jpg" class="hero-slide" alt="Motion Graphics Background">
+        </div>
+
+        <div class="container hero-content">
+            <h1 class="animated-text" data-animated-words="Artistry,Motion,Innovation">Crafting <span class="text-accent">Artistry</span> that <span class="text-accent word-switcher">Moves</span>.</h1>
+            <p class="hero-subhead fade-in-up delay-1">The multi-disciplinary portfolio of <strong>Samarth Rana</strong> — Fine Art, Motion Graphics, Product Design & Video Editing.</p>
+
+            <div class="hero-actions fade-in-up delay-2">
+                <a href="#work" class="btn btn-accent">View Portfolio</a>
+                <a href="#contact" class="btn btn-outline">Let's Collaborate</a>
+            </div>
+
+            <button id="video-toggle" class="video-control" aria-label="Pause background video">Pause Video</button>
+        </div>
+
+        <div class="scroll-cue">
+            <span class="mouse">
+                <span class="wheel"></span>
+            </span>
+        </div>
+    </header>
+
+    <section id="work" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Creative Showcase</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="work-grid">
+                
+                <article class="card work-card" data-card-id="fine-arts" data-card-title="Fine Arts Gallery" data-card-type="image-gallery">
+                    <div class="card-image">
+                        <div class="placeholder-img" style="background: var(--red-800);">🎨</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tags">
+                            <span class="tag">Shading</span>
+                            <span class="tag">Portraits</span>
+                            <span class="tag">Hyperrealism</span>
+                        </div>
+                        <h3>Fine Arts (Traditional)</h3>
+                        <p>A collection of traditional and digital artworks, emphasizing intricate shading and hyperrealistic detail.</p>
+                        <div class="card-meta">
+                            <span>View Gallery</span>
+                            <button class="link-arrow view-button" aria-label="View Fine Arts Gallery">View &rarr;</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card work-card" data-card-id="video-editing" data-card-title="Video Editing Projects" data-card-type="video-links">
+                    <div class="card-image">
+                        <div class="placeholder-img" style="background: var(--red-600);">🎬</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tags">
+                            <span class="tag">Reels</span>
+                            <span class="tag">Commercials</span>
+                            <span class="tag">Shorts</span>
+                        </div>
+                        <h3>Video Editing Reel</h3>
+                        <p>Dynamic short-form content and commercial edits, optimized for social platforms and engagement.</p>
+                        <div class="card-meta">
+                            <span>Watch Videos</span>
+                            <button class="link-arrow view-button" aria-label="View Video Editing Projects">View &rarr;</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card work-card" data-card-id="colored-works" data-card-title="Colored Works" data-card-type="image-gallery">
+                    <div class="card-image">
+                        <div class="placeholder-img" style="background: var(--red-400);">🌈</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tags">
+                            <span class="tag">Illustration</span>
+                            <span class="tag">Digital Art</span>
+                            <span class="tag">Vibrance</span>
+                        </div>
+                        <h3>Vibrant Colored Works</h3>
+                        <p>Exploration of color theory and digital painting techniques to create vivid and impactful illustrations.</p>
+                        <div class="card-meta">
+                            <span>View Gallery</span>
+                            <button class="link-arrow view-button" aria-label="View Colored Works Gallery">View &rarr;</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card work-card" data-card-id="product-design" data-card-title="Industrial Product Design" data-card-type="text-content">
+                    <div class="card-image">
+                        <div class="placeholder-img" style="background: var(--red-800);">🛠️</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tags">
+                            <span class="tag">CAD</span>
+                            <span class="tag">DFM</span>
+                            <span class="tag">Prototyping</span>
+                        </div>
+                        <h3>Product Design Studies</h3>
+                        <p>Concepts and technical drawings for physical products, focusing on user interaction and manufacturing.</p>
+                        <div class="card-meta">
+                            <span>Details</span>
+                            <button class="link-arrow view-button" aria-label="View Product Design Studies">View &rarr;</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card work-card" data-card-id="motion-graphics" data-card-title="Motion Graphics & VFX" data-card-type="video-links">
+                    <div class="card-image">
+                        <div class="placeholder-img" style="background: var(--red-600);">✨</div>
+                    </div>
+                    <div class="card-content">
+                        <div class="tags">
+                            <span class="tag">After Effects</span>
+                            <span class="tag">Cinema 4D</span>
+                            <span class="tag">Compositing</span>
+                        </div>
+                        <h3>Dynamic Motion Reels</h3>
+                        <p>Brand animations, visual effects sequences, and immersive motion design projects.</p>
+                        <div class="card-meta">
+                            <span>Watch Reels</span>
+                            <button class="link-arrow view-button" aria-label="View Motion Graphics Reels">View &rarr;</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Traditional Art Showcase -->
+    <section id="instagram-showcase" class="section-padding instagram-showcase-section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Traditional Art in Motion</h2>
+                <div class="line"></div>
+            </div>
+
+            <!-- Instagram Post -->
+            <div style="margin-top: 40px; display: flex; justify-content: center;">
+                <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPKJfjjEgp0/" data-instgrm-version="14" style="background:#fff;border:0;margin:0 auto;max-width:540px;width:100%;">
+                    <div style="padding:16px;">
+                        <a href="https://www.instagram.com/p/DPKJfjjEgp0/" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
+                    </div>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="dynamic-sections" class="section-padding bg-darker">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Explore Interactively</h2>
+                <div class="line"></div>
+            </div>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="3d-models">3D Works</button>
+                    <button class="tab-button" data-tab="concept-sketches">Concept Sketches</button>
+                    <button class="tab-button" data-tab="creative-process">Creative Process</button>
+                </div>
+
+                <div class="tab-content active" id="3d-models">
+                    <div id="canvas-container" class="canvas-3d-active"></div>
+                    <div id="canvas-fallback" style="display:none; text-align: center; color: var(--red-400);">
+                        <p>3D content requires JavaScript to load. If this persists, please ensure your browser supports WebGL.</p>
+                        <img src="assets/images/fallback-3d.png" alt="3D Model Fallback" style="max-width: 100%; height: auto; margin-top: 20px; border-radius: 8px;">
+                    </div>
+                    <p class="tab-description text-center">Drag to orbit the model, click to change material properties. This tab showcases my 3D rendering and modeling skills.</p>
+                </div>
+
+                <div class="tab-content" id="concept-sketches">
+                    <div class="gallery-placeholder" style="background: linear-gradient(135deg, var(--red-800), var(--red-600));">
+                        <p>Content for Concept Sketches.</p>
+                        <img src="assets/images/placeholder-sketch.png" alt="Sketch Placeholder" style="width: 150px; opacity: 0.7; margin: 20px auto;">
+                    </div>
+                    <p class="tab-description text-center">A glimpse into the initial ideation and sketching phase of product and motion concepts.</p>
+                </div>
+
+                <div class="tab-content" id="creative-process">
+                    <ul class="process-steps">
+                        <li><strong>Inspiration & Research:</strong> Deep dive into trends, user needs, and artistic movements.</li>
+                        <li><strong>Ideation & Storyboarding:</strong> Rapid concept generation for physical products and motion sequences.</li>
+                        <li><strong>Prototyping & Animation:</strong> Bringing ideas to life, whether through physical models or digital keyframes.</li>
+                        <li><strong>Refinement & Delivery:</strong> Polishing details, optimizing for production (DFM) or final render.</li>
+                    </ul>
+                    <p class="tab-description text-center">My integrated approach to creative problem-solving across various disciplines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-padding">
+        <div class="container about-layout">
+            <div class="about-image">
+                <div class="circle-frame">
+                    <!-- 
+                    Profile Image Sources (in order of priority):
+                    1. Instagram Post: https://www.instagram.com/p/DNRVew2Tebm/
+                    2. Google Photos: https://photos.app.goo.gl/PRAh7j2DrPMubKSV6
+                    3. Local fallback: assets/image/Consistency.jpg
+                    
+                    To use Instagram image directly:
+                    - Open the Instagram post
+                    - Right-click the image > "Copy image address"
+                    - Replace the src below with that direct URL
+                    -->
+                    <img src="assets/images/Consistency.jpg" alt="Samarth Rana" class="profile-image" id="profile-picture" data-instagram="https://www.instagram.com/p/DNRVew2Tebm/" data-google-photos="https://photos.app.goo.gl/PRAh7j2DrPMubKSV6">
+                </div>
+            </div>
+            <div class="about-text">
+                <h2>About Samarth</h2>
+                <p class="lead">I thrive at the intersection of traditional artistry and dynamic digital creation.</p>
+                <p>My expertise spans the meticulous detail of **hyperrealistic fine art**, the fluid narrative of **motion graphics and video editing**, and the tangible innovation of **industrial product design**. I believe in crafting experiences that are not just seen, but felt and interacted with, bringing a unique blend of aesthetic sensitivity and technical precision to every project.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/onedeadleaf/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+                    <a href="https://www.facebook.com/arcmier" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+                    <a href="https://www.linkedin.com/in/samarth-rana-aa0a5b2aa" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+                    <a href="https://x.com/HanmaSam" target="_blank" rel="noopener noreferrer" aria-label="Twitter/X">Twitter/X</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="signature" class="section-padding signature-section">
+        <div class="container">
+            <div class="signature-container">
+                <div class="signature-text-wrapper">
+                    <svg id="signature-svg" width="400" height="100" viewBox="0 0 400 100">
+                        <path d="M 10,50 C 20,20 40,20 50,50 C 60,80 80,80 90,50 C 100,20 120,20 130,50 C 140,80 160,80 170,50 C 180,20 200,20 210,50 C 220,80 240,80 250,50 C 260,20 280,20 290,50 C 300,80 320,80 330,50 C 340,20 360,20 370,50 C 380,80 400,80 410,50" fill="transparent"/>
+                    </svg>
+                </div>
+                <div class="signature-underline"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding bg-gradient">
+        <div class="container container-narrow">
+            <div class="text-center">
+                <h2>Ready to Bring Your Vision to Life?</h2>
+                <p>Let's collaborate on your next masterpiece, whether physical or digital.</p>
+            </div>
+
+            <div class="contact-methods">
+                <a href="mailto:samarth.rana.design@email.com" class="btn btn-outline btn-block contact-link" aria-label="Email Samarth Rana directly">
+                    <span class="text-accent">Email Me Directly</span>
+                    <small>samarth.rana.design@email.com</small>
+                </a>
+                
+                <a href="#" target="_blank" class="btn btn-outline btn-block contact-link" aria-label="Schedule a meeting">
+                    <span class="text-accent">Book a Consultation</span>
+                    <small>Schedule 30 mins via Calendly</small>
+                </a>
+            </div>
+            
+            <div class="contact-divider">OR</div>
+
+            <form id="contact-form" class="contact-form">
+                <p class="form-instruction">Send a detailed project inquiry below:</p>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Project Scope & Details</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-accent btn-block">Send Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-left">
+                <span class="logo-small">SR.</span>
+                <p>&copy; 2025 Samarth Rana. Multi-Disciplinary Creative.</p>
+                <p class="location-text">📍 Dehradun, Uttarakhand, India</p>
+            </div>
+            <div class="footer-right">
+                <p>Innovation in Form & Flow.</p>
+                <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="back-to-top">Back to Top ↑</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Detail Pages for Each Card -->
+    <div id="detail-pages" class="detail-pages-container">
+        <!-- Fine Arts Detail Page -->
+        <div id="detail-fine-arts" class="detail-page" data-page-id="fine-arts">
+            <div class="detail-page-header">
+                <button class="back-button" onclick="navigateToMain()" aria-label="Back to main page">
+                    <span>&larr;</span> Back to Portfolio
+                </button>
+                <h1>Fine Arts Gallery</h1>
+                <p class="detail-subtitle">Hyperrealism and Shading Studies</p>
+            </div>
+            <div class="detail-page-content">
+                <div class="detail-intro">
+                    <p>This gallery showcases my mastery of light, shadow, and texture across various mediums, from graphite to digital painting. Each piece represents hours of meticulous work, focusing on capturing the essence of realism through careful observation and technique.</p>
+                </div>
+                <div class="detail-gallery">
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: var(--red-800);">
+                            <span style="font-size: 4rem;">🎨</span>
+                            <p>Graphite Portrait Study</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: var(--red-700);">
+                            <span style="font-size: 4rem;">🎨</span>
+                            <p>Digital Shading Study</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: var(--red-600);">
+                            <span style="font-size: 4rem;">🎨</span>
+                            <p>Hyperrealistic Eye Detail</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: var(--red-500);">
+                            <span style="font-size: 4rem;">🎨</span>
+                            <p>Charcoal Figure Drawing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-tags">
+                    <span class="tag">Shading</span>
+                    <span class="tag">Portraits</span>
+                    <span class="tag">Hyperrealism</span>
+                    <span class="tag">Graphite</span>
+                    <span class="tag">Digital Art</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Editing Detail Page -->
+        <div id="detail-video-editing" class="detail-page" data-page-id="video-editing">
+            <div class="detail-page-header">
+                <button class="back-button" onclick="navigateToMain()" aria-label="Back to main page">
+                    <span>&larr;</span> Back to Portfolio
+                </button>
+                <h1>Video Editing Projects</h1>
+                <p class="detail-subtitle">Dynamic Short-Form Content</p>
+            </div>
+            <div class="detail-page-content">
+                <div class="detail-intro">
+                    <p>Showcasing editing, motion tracking, and sound design skills for social and commercial campaigns. Each project demonstrates expertise in pacing, visual storytelling, and platform optimization.</p>
+                </div>
+                <div class="video-grid">
+                    <div class="video-item">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DLkcRTASJyQ/" data-instgrm-version="14" style="background:#fff;border:0;margin:0 auto;max-width:540px;width:100%;">
+                            <div style="padding:16px;">
+                                <a href="https://www.instagram.com/p/DLkcRTASJyQ/" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="video-item">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DPKJfjjEgp0/" data-instgrm-version="14" style="background:#fff;border:0;margin:0 auto;max-width:540px;width:100%;">
+                            <div style="padding:16px;">
+                                <a href="https://www.instagram.com/p/DPKJfjjEgp0/" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="video-item">
+                        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/DIjbV42SRwT/" data-instgrm-version="14" style="background:#fff;border:0;margin:0 auto;max-width:540px;width:100%;">
+                            <div style="padding:16px;">
+                                <a href="https://www.instagram.com/p/DIjbV42SRwT/" target="_blank" rel="noopener noreferrer">View this post on Instagram</a>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="detail-tags">
+                    <span class="tag">Reels</span>
+                    <span class="tag">Commercials</span>
+                    <span class="tag">Shorts</span>
+                    <span class="tag">Motion Tracking</span>
+                    <span class="tag">Sound Design</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colored Works Detail Page -->
+        <div id="detail-colored-works" class="detail-page" data-page-id="colored-works">
+            <div class="detail-page-header">
+                <button class="back-button" onclick="navigateToMain()" aria-label="Back to main page">
+                    <span>&larr;</span> Back to Portfolio
+                </button>
+                <h1>Vibrant Colored Works</h1>
+                <p class="detail-subtitle">Digital Illustrations & Color Theory</p>
+            </div>
+            <div class="detail-page-content">
+                <div class="detail-intro">
+                    <p>Exploration of color theory and digital painting techniques to create vivid and impactful illustrations. Each piece demonstrates a deep understanding of color harmony, mood, and visual impact.</p>
+                </div>
+                <div class="detail-gallery">
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: linear-gradient(135deg, #FF6B9D, #C44569);">
+                            <span style="font-size: 4rem;">🌈</span>
+                            <p>Vibrant Illustration 1</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: linear-gradient(135deg, #4ECDC4, #44A08D);">
+                            <span style="font-size: 4rem;">🌈</span>
+                            <p>Vibrant Illustration 2</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item-large">
+                        <div class="gallery-placeholder-large" style="background: linear-gradient(135deg, #F093FB, #F5576C);">
+                            <span style="font-size: 4rem;">🌈</span>
+                            <p>Vibrant Illustration 3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-tags">
+                    <span class="tag">Illustration</span>
+                    <span class="tag">Digital Art</span>
+                    <span class="tag">Vibrance</span>
+                    <span class="tag">Color Theory</span>
+                    <span class="tag">Digital Painting</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Design Detail Page -->
+        <div id="detail-product-design" class="detail-page" data-page-id="product-design">
+            <div class="detail-page-header">
+                <button class="back-button" onclick="navigateToMain()" aria-label="Back to main page">
+                    <span>&larr;</span> Back to Portfolio
+                </button>
+                <h1>Industrial Product Design</h1>
+                <p class="detail-subtitle">CAD, DFM & Prototyping</p>
+            </div>
+            <div class="detail-page-content">
+                <div class="detail-intro">
+                    <p>Concepts and technical drawings for physical products, focusing on user interaction and manufacturing. Each project demonstrates expertise in CAD development, material selection, and Design for Manufacturing (DFM) principles.</p>
+                </div>
+                <div class="design-showcase">
+                    <div class="design-item">
+                        <div class="design-placeholder">
+                            <span style="font-size: 3rem;">🛠️</span>
+                            <h3>Concept Ideation</h3>
+                            <p>Initial sketches and concept development</p>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <div class="design-placeholder">
+                            <span style="font-size: 3rem;">📐</span>
+                            <h3>CAD Development</h3>
+                            <p>Technical drawings and 3D modeling</p>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <div class="design-placeholder">
+                            <span style="font-size: 3rem;">⚙️</span>
+                            <h3>DFM Analysis</h3>
+                            <p>Manufacturing optimization</p>
+                        </div>
+                    </div>
+                    <div class="design-item">
+                        <div class="design-placeholder">
+                            <span style="font-size: 3rem;">🔧</span>
+                            <h3>Prototyping</h3>
+                            <p>Physical model development</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-tags">
+                    <span class="tag">CAD</span>
+                    <span class="tag">DFM</span>
+                    <span class="tag">Prototyping</span>
+                    <span class="tag">Industrial Design</span>
+                    <span class="tag">3D Modeling</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Motion Graphics Detail Page -->
+        <div id="detail-motion-graphics" class="detail-page" data-page-id="motion-graphics">
+            <div class="detail-page-header">
+                <button class="back-button" onclick="navigateToMain()" aria-label="Back to main page">
+                    <span>&larr;</span> Back to Portfolio
+                </button>
+                <h1>Motion Graphics & VFX</h1>
+                <p class="detail-subtitle">Brand Animations & Visual Effects</p>
+            </div>
+            <div class="detail-page-content">
+                <div class="detail-intro">
+                    <p>Brand animations, visual effects sequences, and immersive motion design projects. Each piece showcases expertise in After Effects, Cinema 4D, and advanced compositing techniques.</p>
+                </div>
+                <div class="motion-showcase">
+                    <div class="motion-item">
+                        <div class="motion-placeholder">
+                            <span style="font-size: 3rem;">✨</span>
+                            <h3>Brand Animation</h3>
+                            <p>Dynamic logo animations and brand identity</p>
+                        </div>
+                    </div>
+                    <div class="motion-item">
+                        <div class="motion-placeholder">
+                            <span style="font-size: 3rem;">🎭</span>
+                            <h3>VFX Sequence</h3>
+                            <p>Visual effects and compositing</p>
+                        </div>
+                    </div>
+                    <div class="motion-item">
+                        <div class="motion-placeholder">
+                            <span style="font-size: 3rem;">🎬</span>
+                            <h3>Motion Reel</h3>
+                            <p>Showcase of motion design work</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-tags">
+                    <span class="tag">After Effects</span>
+                    <span class="tag">Cinema 4D</span>
+                    <span class="tag">Compositing</span>
+                    <span class="tag">VFX</span>
+                    <span class="tag">Animation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-container" class="modal-container">
+        <div class="modal-content">
+            <button class="close-button" aria-label="Close modal">&times;</button>
+            <h3 id="modal-title"></h3>
+            <div id="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script async src="//www.instagram.com/embed.js"></script>
+    <script>
+        // Wait for Instagram embed script to load and process all embeds
+        function processInstagramEmbed() {
+            if (window.instgrm && window.instgrm.Embeds) {
+                window.instgrm.Embeds.process();
+            } else {
+                // Retry after a short delay
+                setTimeout(processInstagramEmbed, 500);
+            }
+        }
+        
+        // Start processing once DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', processInstagramEmbed);
+        } else {
+            processInstagramEmbed();
+        }
+        
+        // Also process when page becomes visible (for tabs)
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden && window.instgrm && window.instgrm.Embeds) {
+                window.instgrm.Embeds.process();
+            }
+        });
+    </script>
+
+    <!-- Draggable Audio Player -->
+    <div id="audio-player" class="audio-player" style="display: none; position: fixed; bottom: 30px; right: 30px; width: 320px; height: auto; background: linear-gradient(135deg, #0F0F1E 0%, #1A1A3A 100%); border: 1px solid rgba(0, 217, 255, 0.3); border-radius: 16px; padding: 24px; z-index: 9999; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(0, 217, 255, 0.2); cursor: move; user-select: none; backdrop-filter: blur(20px); font-family: 'Inter', sans-serif;">
+        <div class="audio-player-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; cursor: move;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 24px;">🎵</span>
+                <div>
+                    <h3 style="margin: 0; color: #fff; font-size: 14px; font-weight: 700; letter-spacing: 0.5px;">AKAI</h3>
+                    <p style="margin: 2px 0 0 0; color: rgba(0, 217, 255, 0.8); font-size: 11px; font-weight: 600; text-transform: uppercase;">Now Playing</p>
+                </div>
+            </div>
+            <button id="close-player" style="background: rgba(0, 217, 255, 0.2); border: none; color: rgba(0, 217, 255, 0.8); font-size: 20px; cursor: pointer; padding: 4px 8px; border-radius: 6px; transition: all 0.3s ease;">×</button>
+        </div>
+        
+        <div class="audio-progress-container" style="margin-bottom: 16px;">
+            <div class="audio-progress" style="background: rgba(0, 217, 255, 0.1); border-radius: 8px; height: 6px; overflow: hidden; cursor: pointer; position: relative; border: 1px solid rgba(0, 217, 255, 0.2);">
+                <div id="progress-bar" style="background: linear-gradient(90deg, #00D9FF, #00F0FF); height: 100%; width: 0%; transition: width 0.1s; border-radius: 8px; box-shadow: 0 0 12px rgba(0, 217, 255, 0.6);"></div>
+            </div>
+        </div>
+
+        <div class="audio-time" style="color: rgba(232, 230, 240, 0.5); font-size: 11px; text-align: center; margin-bottom: 18px; letter-spacing: 0.5px; font-weight: 600;">
+            <span id="current-time">0:00</span> <span style="color: rgba(232, 230, 240, 0.3);">•</span> <span id="duration">0:00</span>
+        </div>
+
+        <div class="audio-controls" style="display: flex; gap: 12px; align-items: center; justify-content: center; margin-bottom: 16px;">
+            <button id="play-btn" style="background: linear-gradient(135deg, #00D9FF, #0099CC); border: none; border-radius: 12px; width: 48px; height: 48px; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: #0F0F1E; font-weight: 700; box-shadow: 0 8px 16px rgba(0, 217, 255, 0.4); transform: translateY(0);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 24px rgba(0, 217, 255, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 16px rgba(0, 217, 255, 0.4)';">▶</button>
+            <button id="pause-btn" style="background: linear-gradient(135deg, #00D9FF, #0099CC); border: none; border-radius: 12px; width: 48px; height: 48px; font-size: 18px; cursor: pointer; display: none; color: #0F0F1E; font-weight: 700; align-items: center; justify-content: center; transition: all 0.3s ease; box-shadow: 0 8px 16px rgba(0, 217, 255, 0.4); transform: translateY(0);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 24px rgba(0, 217, 255, 0.6)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 16px rgba(0, 217, 255, 0.4)';">⏸</button>
+            <button id="repeat-btn" style="background: rgba(0, 217, 255, 0.2); border: 1px solid rgba(0, 217, 255, 0.4); border-radius: 8px; width: 40px; height: 40px; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; color: rgba(0, 217, 255, 0.6); font-weight: 600;" onmouseover="this.style.background='rgba(0, 217, 255, 0.3)'; this.style.color='#00D9FF'; this.style.boxShadow='0 0 12px rgba(0, 217, 255, 0.4)';" onmouseout="this.style.background='rgba(0, 217, 255, 0.2)'; this.style.color='rgba(0, 217, 255, 0.6)'; this.style.boxShadow='none';" title="Toggle repeat mode">🔁</button>
+        </div>
+
+        <div class="audio-visual" style="display: flex; gap: 4px; justify-content: center; align-items: flex-end; height: 32px; margin-top: 16px;">
+            <div style="width: 4px; height: 60%; background: linear-gradient(180deg, #00D9FF, #0099CC); border-radius: 2px; animation: pulse 0.6s ease-in-out infinite; animation-delay: 0s;"></div>
+            <div style="width: 4px; height: 80%; background: linear-gradient(180deg, #00D9FF, #0099CC); border-radius: 2px; animation: pulse 0.6s ease-in-out infinite; animation-delay: 0.1s;"></div>
+            <div style="width: 4px; height: 40%; background: linear-gradient(180deg, #00D9FF, #0099CC); border-radius: 2px; animation: pulse 0.6s ease-in-out infinite; animation-delay: 0.2s;"></div>
+            <div style="width: 4px; height: 70%; background: linear-gradient(180deg, #00D9FF, #0099CC); border-radius: 2px; animation: pulse 0.6s ease-in-out infinite; animation-delay: 0.3s;"></div>
+            <div style="width: 4px; height: 50%; background: linear-gradient(180deg, #00D9FF, #0099CC); border-radius: 2px; animation: pulse 0.6s ease-in-out infinite; animation-delay: 0.4s;"></div>
+        </div>
+
+        <!-- Resize Handle -->
+        <div id="resize-handle" style="position: absolute; bottom: 0; right: 0; width: 16px; height: 16px; background: linear-gradient(135deg, transparent 50%, rgba(0, 217, 255, 0.6) 50%); cursor: se-resize; border-radius: 0 0 16px 0;"></div>
+
+        <audio id="audio-element" style="display: none;"></audio>
+    </div>
+
+    <style>
+        @keyframes pulse {
+            0%, 100% { transform: scaleY(0.6); opacity: 0.6; }
+            50% { transform: scaleY(1); opacity: 1; }
+        }
+
+        #audio-player {
+            position: fixed;
+            resize: both;
+            overflow: hidden;
+            min-width: 280px;
+            min-height: auto;
+        }
+    </style>
+</body>
+</html>
