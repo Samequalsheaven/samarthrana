@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupProfileImage();
     setupInstagramEmbed();
     setupHeroCarousel(); // Enhanced hero with carousel
+    setupProximityAnimations(); // New proximity effects
     
     // Handle direct navigation to hash URL
     if (window.location.hash) {
@@ -41,38 +42,11 @@ document.addEventListener('DOMContentLoaded', () => {
 const setupProfileImage = () => {
     const profileImg = document.getElementById('profile-picture');
     if (!profileImg) return;
-
-    // Instagram post URL
-    const instagramPostUrl = 'https://www.instagram.com/p/DNRVew2Tebm/';
     
-    const instagramMediaUrl = `https://www.instagram.com/p/DNRVew2Tebm/media/?size=l`;
-    
-    let attemptCount = 0;
-    const fallbacks = [
-        profileImg.src,   // Current source (try first)
-        'assets/images/Consistency.jpg' // Local fallback (updated path)
-    ];
-    
+    // Using placeholder for demo
     profileImg.onerror = () => {
-        attemptCount++;
-        if (attemptCount < fallbacks.length) {
-            console.warn(`Image source ${attemptCount} failed. Trying fallback ${attemptCount + 1}.`);
-            profileImg.src = fallbacks[attemptCount];
-        } else {
-            // All sources failed, show placeholder
-            console.error('All image sources failed to load.');
-            profileImg.style.display = 'none';
-            if (!profileImg.parentElement.querySelector('.placeholder-avatar')) {
-                const placeholder = document.createElement('div');
-                placeholder.className = 'placeholder-avatar';
-                placeholder.textContent = 'SR';
-                profileImg.parentElement.appendChild(placeholder);
-            }
-        }
+         console.warn('Image failed to load, keeping placeholder');
     };
-    
-    // Add crossOrigin attribute to handle CORS if needed
-    profileImg.crossOrigin = 'anonymous';
 };
 
 /* ------------------------------------------------------------
@@ -87,55 +61,30 @@ const getFineArtsContent = () => {
         
         <div class="modal-gallery">
             <div class="gallery-item">
-                <img src="assets/images/placeholder-fineart-1.jpg" alt="Graphite Portrait Study">
+                <img src="https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?auto=format&fit=crop&w=800&q=80" alt="Graphite Portrait Study">
             </div>
             <div class="gallery-item">
-                <img src="assets/images/placeholder-fineart-2.jpg" alt="Digital Shading Study">
+                <img src="https://images.unsplash.com/photo-1515405295579-ba7f9f92f413?auto=format&fit=crop&w=800&q=80" alt="Digital Shading Study">
             </div>
             <div class="gallery-item">
-                <img src="assets/images/placeholder-fineart-3.jpg" alt="Hyperrealistic Eye Detail">
+                <img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?auto=format&fit=crop&w=800&q=80" alt="Hyperrealistic Eye Detail">
             </div>
             <div class="gallery-item">
-                <img src="assets/images/placeholder-fineart-4.jpg" alt="Charcoal Figure Drawing">
+                <img src="https://images.unsplash.com/photo-1582201942988-13e60e4556ee?auto=format&fit=crop&w=800&q=80" alt="Charcoal Figure Drawing">
             </div>
         </div>
-        <p style="margin-top: 1rem; color: var(--red-400);">**Note:** Update image paths in assets/images with your actual artwork.</p>
     `;
 };
 
 // --- B. Video Editing Projects Content ---
 const getVideoEditingContent = () => {
-    const instagramEmbedCode = `
-        <div class="video-embed-container" style="max-width: 400px; margin: 0 auto;">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&mute=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
-        </div>
-        <p class="text-center" style="margin-top: 1rem;">This is a placeholder video. You can embed your **Instagram Reels** directly here using their embed code, or link out to YouTube/Vimeo.</p>
-        <p class="text-center"><a href="https://www.instagram.com/your_reel_page" target="_blank" class="btn btn-outline" style="margin-top: 1rem;">Visit My Instagram Reels Page &rarr;</a></p>
-    `;
-
     return `
         <h4 class="text-accent">Dynamic Short-Form Content</h4>
         <p>Showcasing editing, motion tracking, and sound design skills for social and commercial campaigns.</p>
-        ${instagramEmbedCode}
+        <div style="background: rgba(0,0,0,0.5); padding: 2rem; text-align: center; border-radius: 8px; margin-top: 1rem;">
+            <p>Video Embeds would appear here.</p>
+        </div>
     `;
-};
-
-// --- C. General Content Resolver ---
-const getSubpageContent = (id) => {
-    switch (id) {
-        case 'fine-arts':
-            return getFineArtsContent();
-        case 'video-editing':
-            return getVideoEditingContent();
-        case 'colored-works':
-            return '<h4>Vibrant Digital Illustrations</h4><p>Details on color palettes, mood, and digital mediums used for this set of works will go here. You can use the same modal-gallery grid here!</p>';
-        case 'product-design':
-            return '<h4>Industrial Design Case Study: Project X</h4><p>Detailed breakdown of concept ideation, CAD development, material selection, and DFM principles. Include renderings here.</p>';
-        case 'motion-graphics':
-            return '<h4>VFX & Animation Breakdown</h4><p>This area will feature embedded YouTube/Vimeo links showing the final motion pieces, along with a text breakdown of the software and effects used.</p>';
-        default:
-            return '<p>Content not found. Please check the project ID.</p>';
-    }
 };
 
 /* ------------------------------------------------------------
@@ -144,7 +93,6 @@ const getSubpageContent = (id) => {
 // Global navigation function
 window.navigateToMain = () => {
     const detailPages = document.getElementById('detail-pages');
-    const mainContent = document.querySelector('body > *:not(#detail-pages):not(script)');
     
     // Hide all detail pages
     document.querySelectorAll('.detail-page').forEach(page => {
@@ -159,13 +107,17 @@ window.navigateToMain = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
     // Update URL without page reload
-    if (window.history && window.history.pushState) {
-        window.history.pushState({ page: 'main' }, '', window.location.pathname);
+    try {
+        if (window.history && window.history.pushState) {
+            window.history.pushState({ page: 'main' }, '', window.location.pathname);
+        }
+    } catch (e) {
+        console.warn('History API not supported in this environment', e);
     }
 };
 
 const setupModalLogic = () => {
-    const viewButtons = document.querySelectorAll('.view-button');
+    const workCards = document.querySelectorAll('.work-card');
     const detailPages = document.getElementById('detail-pages');
 
     const navigateToDetailPage = (cardId) => {
@@ -191,15 +143,18 @@ const setupModalLogic = () => {
         }
         
         // Update URL
-        if (window.history && window.history.pushState) {
-            window.history.pushState({ page: cardId }, '', `#${cardId}`);
+        try {
+            if (window.history && window.history.pushState) {
+                window.history.pushState({ page: cardId }, '', `#${cardId}`);
+            }
+        } catch (e) {
+            console.warn('History API not supported in this environment', e);
         }
     };
 
-    viewButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
+    workCards.forEach(card => {
+        card.addEventListener('click', (e) => {
             e.preventDefault();
-            const card = button.closest('.work-card');
             const cardId = card.dataset.cardId;
             navigateToDetailPage(cardId);
         });
@@ -214,7 +169,7 @@ const setupModalLogic = () => {
                 navigateToDetailPage(cardId);
             }
         } else {
-            navigateToMain();
+            window.navigateToMain();
         }
     });
 };
@@ -223,15 +178,16 @@ const setupModalLogic = () => {
    4. Tab Switching Logic
 ------------------------------------------------------------ */
 let scene, camera, renderer, controls, model, container;
-const ACCENT_COLOR_1 = 0xD8005A; // Vivid Magenta
-const ACCENT_COLOR_2 = 0xEF90BE; // Radiant Pink
+const ACCENT_COLOR_1 = 0x0EA5E9; // Vivid Sky Blue
+const ACCENT_COLOR_2 = 0x38BDF8; // Light Cyan
 let is3DInitialized = false;
 
 const init3D = () => {
     if (is3DInitialized) return;
     container = document.getElementById('canvas-container');
     if (!container || !window.WebGLRenderingContext) {
-        document.getElementById('canvas-fallback').style.display = 'block';
+        const fallback = document.getElementById('canvas-fallback');
+        if(fallback) fallback.style.display = 'block';
         return;
     }
 
@@ -259,7 +215,7 @@ const init3D = () => {
     // Placeholder Geometric Shape (Torus Knot)
     const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
     const material = new THREE.MeshStandardMaterial({ 
-        color: 0x3B1B1B, // Dark Ruby
+        color: 0x1E293B, // Slate 800
         roughness: 0.2,
         metalness: 0.9,
     });
@@ -275,7 +231,7 @@ const init3D = () => {
     renderer.domElement.addEventListener('click', () => {
         if (model && model.material) {
             const currentColor = model.material.color.getHex();
-            const newColor = currentColor === 0x3B1B1B ? ACCENT_COLOR_1 : 0x3B1B1B;
+            const newColor = currentColor === 0x1E293B ? ACCENT_COLOR_1 : 0x1E293B;
             model.material.color.setHex(newColor);
         }
     });
@@ -295,7 +251,7 @@ const init3D = () => {
 };
 
 const onWindowResize = () => {
-    if (container) {
+    if (container && renderer && camera) {
         const width = container.clientWidth;
         const height = container.clientHeight;
         renderer.setSize(width, height);
@@ -320,9 +276,13 @@ const setupTabLogic = () => {
             button.classList.add('active');
             document.getElementById(targetTabId).classList.add('active');
             
-            // Special handling for the 3D tab: only initialize Three.js when needed
-            if (targetTabId === '3d-models' && !is3DInitialized) {
-                init3D();
+            // Special handling for the 3D tab
+            if (targetTabId === '3d-models') {
+                if (!is3DInitialized) {
+                    init3D();
+                } else {
+                    setTimeout(onWindowResize, 100); // Recalculate size
+                }
             }
         });
     });
@@ -334,7 +294,7 @@ const setupTabLogic = () => {
 };
 
 /* ------------------------------------------------------------
-   5. Dynamic Text Animation (Word Switching with Smooth Transitions)
+   5. Dynamic Text Animation
 ------------------------------------------------------------ */
 const setupTextAnimation = () => {
     const headline = document.querySelector('.animated-text');
@@ -347,14 +307,11 @@ const setupTextAnimation = () => {
     const switchWord = () => {
         if (!targetElements || targetElements.length === 0) return;
 
-        // Animate all word switchers
         targetElements.forEach((element, index) => {
             if (index === targetElements.length - 1) {
-                // Last word switcher cycles through words
                 wordIndex = (wordIndex + 1) % words.length;
                 const nextWord = words[wordIndex].trim();
                 
-                // Fade out, change text, fade in
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(10px)';
                 
@@ -367,17 +324,15 @@ const setupTextAnimation = () => {
         });
     };
 
-    // Start switching after initial animation completes
     setTimeout(() => {
         setInterval(switchWord, 4000);
     }, 2000);
     
-    // Add letter-by-letter animation to section headers
     animateSectionHeaders();
 };
 
 /* ------------------------------------------------------------
-   5b. Letter-by-Letter Animation for Headers (Scroll-triggered)
+   5b. Letter-by-Letter Animation for Headers
 ------------------------------------------------------------ */
 const animateSectionHeaders = () => {
     const headers = document.querySelectorAll('.section-header h2');
@@ -420,7 +375,7 @@ const animateHeaderLetters = (header) => {
 };
 
 /* ------------------------------------------------------------
-   6. Scroll Reveal (Entrance Animations with Enhanced Effects)
+   6. Scroll Reveal
 ------------------------------------------------------------ */
 const setupScrollReveal = () => {
     const setupObserver = (selector, className, delay = 0, options = {}) => {
@@ -431,7 +386,6 @@ const setupScrollReveal = () => {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add(className);
-                        // Add additional animation effects
                         if (options.onReveal) {
                             options.onReveal(entry.target);
                         }
@@ -450,38 +404,28 @@ const setupScrollReveal = () => {
         });
     };
 
-    // Apply reveal to work cards (staggered entrance)
     setupObserver('.work-card:nth-child(1)', 'visible-reveal', 0);
     setupObserver('.work-card:nth-child(2)', 'visible-reveal', 150);
     setupObserver('.work-card:nth-child(3)', 'visible-reveal', 300);
     setupObserver('.work-card:nth-child(4)', 'visible-reveal', 450);
     setupObserver('.work-card:nth-child(5)', 'visible-reveal', 600);
     
-    // Apply reveal to process steps with slide-in effect
     setupObserver('.process-steps li', 'visible-reveal', 100, {
         onReveal: (element) => {
             element.style.transition = 'all 0.5s ease-out';
         }
     });
     
-    // Animate section headers on scroll
     setupObserver('.section-header', 'visible-reveal', 0, {
         threshold: 0.3,
         onReveal: (element) => {
             const h2 = element.querySelector('h2');
             const line = element.querySelector('.line');
-            if (h2) {
-                h2.style.animation = 'slideInFromLeft 0.8s ease-out forwards';
-            }
-            if (line) {
-                setTimeout(() => {
-                    line.style.animation = 'lineExpand 1s ease-out forwards';
-                }, 500);
-            }
+            if (h2) h2.style.animation = 'slideInFromLeft 0.8s ease-out forwards';
+            if (line) setTimeout(() => { line.style.animation = 'lineExpand 1s ease-out forwards'; }, 500);
         }
     });
     
-    // Animate about section elements
     setupObserver('.about-text h2', 'visible-reveal', 0);
     setupObserver('.about-text .lead', 'visible-reveal', 200);
     setupObserver('.about-text p', 'visible-reveal', 400);
@@ -491,59 +435,32 @@ const setupScrollReveal = () => {
         }
     });
     
-    // Animate contact form elements
     setupObserver('.contact-methods', 'visible-reveal', 0);
     setupObserver('.contact-form', 'visible-reveal', 300);
-    
-    // Animate Instagram showcase section
     setupObserver('#instagram-showcase', 'visible-reveal', 0);
 };
 
 /* ------------------------------------------------------------
-   6c. Instagram Embed Setup (Scroll-triggered)
+   6c. Instagram Embed Setup
 ------------------------------------------------------------ */
 const setupInstagramEmbed = () => {
     const instagramContainer = document.getElementById('instagram-embed-container');
     if (!instagramContainer) return;
 
     let embedLoaded = false;
-
     const loadInstagramEmbed = () => {
         if (embedLoaded) return;
         embedLoaded = true;
 
-        // Wait for Instagram embed script to be available
         const checkInstagramScript = setInterval(() => {
             if (window.instgrm) {
                 clearInterval(checkInstagramScript);
-                // Process Instagram embeds
                 window.instgrm.Embeds.process();
-                
-                // If it's a video, try to autoplay when in view
-                setTimeout(() => {
-                    const iframe = instagramContainer.querySelector('iframe');
-                    if (iframe) {
-                        // Try to autoplay video if it's a video post
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow?.document;
-                        if (iframeDoc) {
-                            const video = iframeDoc.querySelector('video');
-                            if (video) {
-                                video.muted = true;
-                                video.play().catch(err => {
-                                    console.log('Video autoplay prevented:', err);
-                                });
-                            }
-                        }
-                    }
-                }, 1000);
             }
         }, 100);
-
-        // Timeout after 5 seconds
         setTimeout(() => clearInterval(checkInstagramScript), 5000);
     };
 
-    // Use Intersection Observer to load embed when scrolled into view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !embedLoaded) {
@@ -551,33 +468,26 @@ const setupInstagramEmbed = () => {
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.3,
-        rootMargin: '100px'
-    });
+    }, { threshold: 0.3, rootMargin: '100px' });
 
     observer.observe(instagramContainer);
 };
 
 /* ------------------------------------------------------------
-   6b. Signature Animation (Scroll-triggered)
+   6b. Signature Animation
 ------------------------------------------------------------ */
 const setupSignatureAnimation = () => {
     const signatureContainer = document.querySelector('.signature-container');
     const signatureText = document.getElementById('signature-text');
     const signatureUnderline = document.querySelector('.signature-underline');
     
-    if (!signatureContainer || !signatureText) {
-        return;
-    }
+    if (!signatureContainer || !signatureText) return;
 
-    // Create letter-by-letter animation
     const animateSignatureLetters = () => {
         const text = signatureText.textContent.trim();
         const letterCount = text.length;
         signatureText.innerHTML = '';
         
-        // Split text into letters and spaces
         const letters = text.split('');
         letters.forEach((char, index) => {
             const span = document.createElement('span');
@@ -590,55 +500,38 @@ const setupSignatureAnimation = () => {
             }
             signatureText.appendChild(span);
             
-            // Animate each letter with staggered delay
             setTimeout(() => {
                 span.classList.add('animate');
-            }, 200 + (index * 80)); // Stagger each letter by 80ms
+            }, 200 + (index * 80)); 
         });
         
         return letterCount;
     };
 
-    // Observer for scroll-triggered animation
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && !entry.target.dataset.animated) {
                 entry.target.dataset.animated = 'true';
-                
-                // Show container with fade-in
                 signatureContainer.classList.add('visible');
                 
-                // Show signature text wrapper
                 setTimeout(() => {
                     signatureText.classList.add('visible');
-                    
-                    // Animate letters after text is visible
                     setTimeout(() => {
                         const letterCount = animateSignatureLetters();
-                        
-                        // Animate underline after all letters have appeared
                         const totalLetterDelay = 200 + (letterCount * 80);
-                        
                         setTimeout(() => {
                             signatureUnderline.classList.add('animate');
                             signatureUnderline.style.animation = 'underlineDraw 1.5s ease-out forwards';
                         }, totalLetterDelay + 300);
                     }, 300);
                 }, 200);
-                
                 observer.unobserve(entry.target);
             }
         });
-    }, {
-        threshold: 0.3,
-        rootMargin: '0px 0px -100px 0px'
-    });
+    }, { threshold: 0.3, rootMargin: '0px 0px -100px 0px' });
 
-    // Observe the signature section
     const signatureSection = document.getElementById('signature');
-    if (signatureSection) {
-        observer.observe(signatureSection);
-    }
+    if (signatureSection) observer.observe(signatureSection);
 };
 
 /* ------------------------------------------------------------
@@ -648,12 +541,8 @@ const setupVideoControl = () => {
     const video = document.getElementById('hero-video');
     const videoBtn = document.getElementById('video-toggle');
 
-    if (!video || !videoBtn) {
-        console.warn('Video or video button not found');
-        return;
-    }
+    if (!video || !videoBtn) return;
 
-    // Set initial volume (0.7 = 70% volume) - will be applied when unmuted
     let volumeSet = false;
     const setVolume = () => {
         if (!volumeSet && video.volume !== undefined) {
@@ -661,21 +550,7 @@ const setupVideoControl = () => {
             volumeSet = true;
         }
     };
-
-    // Track if audio has been enabled by user
-    let audioEnabled = false;
-
-    // Enable audio on first user interaction (required by browser autoplay policies)
-    const enableAudio = () => {
-        if (!audioEnabled) {
-            video.muted = false;
-            setVolume();
-            audioEnabled = true;
-            console.log('Audio enabled');
-        }
-    };
-
-    // Update button text based on video state
+    
     const updateButtonText = () => {
         if (video.paused) {
             videoBtn.textContent = "Play Video";
@@ -686,79 +561,27 @@ const setupVideoControl = () => {
         }
     };
 
-    // Set initial button text
     updateButtonText();
 
-    // Handle play/pause toggle
     videoBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
+        video.muted = false; // Enable audio on user interaction
         
-        // Enable audio on first click
-        enableAudio();
-        
-        try {
-            if (video.paused) {
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise
-                        .then(() => {
-                            console.log('Video playing');
-                            updateButtonText();
-                        })
-                        .catch(error => {
-                            console.error('Error playing video:', error);
-                            // Try again with audio enabled
-                            video.muted = false;
-                            video.play()
-                                .then(() => {
-                                    updateButtonText();
-                                })
-                                .catch(err => {
-                                    console.error('Error after unmuting:', err);
-                                    alert('Unable to play video. Please check your browser settings.');
-                                });
-                        });
-                } else {
-                    updateButtonText();
-                }
-            } else {
-                video.pause();
-                console.log('Video paused');
-                updateButtonText();
-            }
-        } catch (error) {
-            console.error('Error toggling video:', error);
+        if (video.paused) {
+            video.play().catch(e => console.log(e));
+        } else {
+            video.pause();
         }
-    });
-
-    // Enable audio on any user interaction (click anywhere on page)
-    // This is required by browser autoplay policies - audio can only play after user interaction
-    const enableAudioOnInteraction = () => {
-        enableAudio();
-    };
-
-    // Listen for user interactions to enable audio (once: true auto-removes after first call)
-    document.addEventListener('click', enableAudioOnInteraction, { once: true });
-    document.addEventListener('touchstart', enableAudioOnInteraction, { once: true });
-    document.addEventListener('keydown', enableAudioOnInteraction, { once: true });
-
-    // Update button text when video state changes
-    video.addEventListener('play', () => {
         updateButtonText();
-        enableAudio(); // Ensure audio is enabled when playing
     });
-    video.addEventListener('pause', updateButtonText);
-    video.addEventListener('ended', updateButtonText);
 
-    // Set volume when video metadata is loaded
-    video.addEventListener('loadedmetadata', () => {
-        setVolume();
-    });
+    video.addEventListener('play', updateButtonText);
+    video.addEventListener('pause', updateButtonText);
 };
 
 /* ------------------------------------------------------------
-   Hero Carousel Setup (Optional visual enhancement)
+   Hero Carousel Setup
 ------------------------------------------------------------ */
 const setupHeroCarousel = () => {
     const slides = document.querySelectorAll('.hero-slide');
@@ -798,5 +621,44 @@ const setupMouseTrail = () => {
         if (Math.random() > 0.6) {
             createDot(e.clientX, e.clientY);
         }
+    });
+};
+
+/* ------------------------------------------------------------
+   8. Proximity Animations (New)
+------------------------------------------------------------ */
+const setupProximityAnimations = () => {
+    // 1. Magnetic Buttons
+    const magneticElements = document.querySelectorAll('.btn, .nav-links a, .logo');
+    
+    magneticElements.forEach(el => {
+        el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            // Move the element slightly towards the mouse (20% of distance)
+            el.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            el.style.transition = 'transform 0.1s ease-out';
+        });
+
+        el.addEventListener('mouseleave', () => {
+            el.style.transform = 'translate(0, 0)';
+            el.style.transition = 'transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        });
+    });
+
+    // 2. Card Spotlight / Proximity Glow
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
     });
 };
